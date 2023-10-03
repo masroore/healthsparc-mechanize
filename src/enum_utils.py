@@ -17,7 +17,7 @@ _WF_STAGES: list[str] = [
 _RB_TYPES = ["Unarchived", "Discrete", "Template", "UserTemplate"]
 
 
-def workflow_stage_descr(val: int) -> str:
+def wf_stage_descr(val: int) -> str:
     return _array_str(val, _WF_STAGES)
 
 
@@ -47,10 +47,10 @@ def wf_progress_pct(wf: int) -> int:
     if step >= 12:  # cancel
         return 0
 
-    if step <= 2:  # create / specimen
+    if step <= 2:  # order create / barcode
         return 5
     if step == 3:  # repeat
-        return 20
+        return 15
     if step in [4, 5]:  # result / HL7
         return 25
     if step == 6:  # verify

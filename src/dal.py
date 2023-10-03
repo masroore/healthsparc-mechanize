@@ -109,7 +109,7 @@ WHERE
         b["render_report"] = bundle_type != 0 and enum_utils.wf_can_generate_report(
             workflow_stage
         )
-        b["workflow_stage_descr"] = enum_utils.workflow_stage_descr(workflow_stage)
+        b["workflow_stage_descr"] = enum_utils.wf_stage_descr(workflow_stage)
         b["bundle_type_descr"] = enum_utils.result_bundle_type(bundle_type)
         b["progress_pct"] = enum_utils.wf_progress_pct(workflow_stage)
 
