@@ -72,6 +72,7 @@ SELECT
     END AS patient_gender,
 	ord.Age AS patient_age,
 	ord.DoB AS patient_dob,
+	ord.OrderNotes AS order_notes,
 	ord.WebAccessToken AS access_token 
 FROM
 	PROE.PatientLabOrders AS ord
