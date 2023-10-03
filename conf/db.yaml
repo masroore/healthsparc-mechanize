@@ -1,0 +1,6 @@
+DRIVER: '{ODBC Driver 18 for SQL Server}'
+Server: '.'
+Database: 'LabMaestro_DEV'
+Trusted_Connection: 'yes'
+Encrypt: 'no'
+TrustServerCertificate: 'yes'
