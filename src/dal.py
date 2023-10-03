@@ -87,11 +87,11 @@ WHERE
 def lab_order_result_bundles(invoice_id: int) -> list[dict]:
     sql = """
 SELECT
-	Id AS source_id,
-	WorkflowStage AS workflow_stage,
+	Id AS bundle_id,
 	TestResultType AS bundle_type,
-	DisplayTitle AS title,
-	ComponentLabTests AS components,
+	WorkflowStage AS workflow_stage,
+	DisplayTitle AS bundle_title,
+	ComponentLabTests AS bundle_components,
 	FinalizingConsultantName AS consultant_name,
 	DateCreated AS created_at,
 	LastUpdated AS updated_at 
@@ -109,7 +109,8 @@ WHERE
         b["render_report"] = bundle_type != 0 and enum_utils.wf_can_generate_report(
             workflow_stage
         )
-        b["workflow_stage"] = enum_utils.workflow_stage_descr(workflow_stage)
-        b["bundle_type"] = enum_utils.result_bundle_type(bundle_type)
+        b["workflow_stage_descr"] = enum_utils.workflow_stage_descr(workflow_stage)
+        b["bundle_type_descr"] = enum_utils.result_bundle_type(bundle_type)
+        b["progress_pct"] = enum_utils.wf_progress_pct(workflow_stage)
 
     return bundles
