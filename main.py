@@ -16,9 +16,15 @@ def get_db():
         db.close()
 
 
-@app.get("/catalog")
-async def catalog(db: Any = Depends(get_db)):
-    rows = dal.get_procedures_catalog()
+@app.get("/procedures")
+async def procedures(db: Any = Depends(get_db)):
+    rows = dal.procedures_catalog()
+    return rows
+
+
+@app.get("/referrers")
+async def referrers(db: Any = Depends(get_db)):
+    rows = dal.referrers_catalog()
     return rows
 
 

@@ -1,7 +1,7 @@
-from . import db, enum_utils
+from . import db, enum_utils, utils
 
 
-def get_procedures_catalog() -> list[dict]:
+def procedures_catalog() -> list[dict]:
     sql = """
 SELECT
 	[Catalog].LabTests.Id AS procedure_id,
@@ -115,3 +115,32 @@ WHERE
         b["progress_pct"] = enum_utils.wf_progress_pct(workflow_stage)
 
     return bundles
+
+
+def referrers_catalog() -> list[dict]:
+    sql = """
+SELECT
+	Id AS source_id,
+	RowGuid AS source_guid,
+	FullName AS name,
+	Name AS name_only,
+	IdentifyingTag AS tag,
+	MobilePhone AS phone,
+	SuppressNetReferral AS disallow_referral,
+	WebLoginEnabled AS web_access,
+	WebLoginId AS username,
+	WebPassKey AS password,
+	LastUpdated AS updated_at 
+FROM
+	[Catalog].Referrers    
+    """
+    refs = db.fetch_all(sql)
+    for r in refs:
+        r["upin"] = utils.hashify([r["name"], r["tag"], r["phone"]])
+        r["initials"] = utils.initials(r["name_only"])
+
+    return refs
+
+
+def report_pdf(bundle_id: int):
+    pass
