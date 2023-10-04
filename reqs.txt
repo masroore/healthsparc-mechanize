@@ -1,0 +1,6 @@
+fastapi
+python-slugify
+pyodbc
+pyyaml
+arrow
+uvicorn[standard]
