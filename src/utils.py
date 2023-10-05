@@ -1,6 +1,18 @@
-import shortuuid
 import hashlib
+from datetime import datetime
+
+import shortuuid
 import slugify
+
+
+def dt_str(dt: datetime) -> str:
+    return dt.strftime("%Y-%m-%d")
+
+
+def inject_branch_uid(branch_uid: str, records: list[dict]) -> list[dict]:
+    for r in records:
+        r["branch_uid"] = branch_uid.upper()
+    return records
 
 
 def generate_uid(
