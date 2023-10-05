@@ -40,12 +40,13 @@ def daily_sales_past_days(branch_uid: str, days: int = 30) -> list[dict]:
     return daily_sales_daterange(branch_uid, start_dt, end_dt)
 
 
-def referrer_sales_date(branch_uid: str, dt: datetime) -> list[dict]:
+def referrer_sales_by_date(branch_uid: str, dt: datetime) -> list[dict]:
     sql = """
 SELECT
     '%s' AS branch_uid,
 	Referrers.Id AS referrer_id,
 	Referrers.RowGuid AS referrer_guid,
+	-- referrer_upin
 	COUNT ( * ) AS num_patients,
 	CAST ( SUM ( Finances.InvoiceMaster.GrossPayable ) AS INTEGER ) AS gross_payable,
 	CAST ( SUM ( Finances.InvoiceMaster.DiscountAmount ) AS INTEGER ) AS discount_amount,
@@ -76,6 +77,7 @@ SELECT
     '%s' AS branch_uid,
 	Referrers.Id AS referrer_id,
 	Referrers.RowGuid AS referrer_guid,
+	-- referrer_upin
 	COUNT ( * ) AS num_patients,
 	CAST ( SUM ( Finances.InvoiceMaster.GrossPayable ) AS INTEGER ) AS gross_payable,
 	CAST ( SUM ( Finances.InvoiceMaster.DiscountAmount ) AS INTEGER ) AS discount_amount,
