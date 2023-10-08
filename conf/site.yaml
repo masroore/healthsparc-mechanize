@@ -1,2 +1,6 @@
+app_name: 'mechanize'
 site_id: 'CGPHQ'
 stats_url: 'http://localhost:9000/'
+auth:
+  username: chevron
+  password: chevron123
