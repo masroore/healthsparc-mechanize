@@ -6,9 +6,7 @@ import slugify
 
 
 def patch_rows(rows: list[dict], patches: dict) -> list[dict]:
-    for r in rows:
-        for lbl, val in patches.items():
-            r[lbl] = val
+    list(map(lambda r: r.update(patches), rows))
     return rows
 
 
