@@ -5,6 +5,13 @@ import shortuuid
 import slugify
 
 
+def patch_rows(rows: list[dict], patches: dict) -> list[dict]:
+    for r in rows:
+        for lbl, val in patches.items():
+            r[lbl] = val
+    return rows
+
+
 def dt_str(dt: datetime) -> str:
     return dt.strftime("%Y-%m-%d")
 
